@@ -1,0 +1,15 @@
+{
+  "name": "miniprogram-storage",
+  "version": "0.0.1",
+  "description": "a simple interface defination for storage and default implementation for wx-miniprogram environment",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "miniprogram",
+    "storage"
+  ],
+  "author": "Jing Zhao",
+  "license": "ISC"
+}
