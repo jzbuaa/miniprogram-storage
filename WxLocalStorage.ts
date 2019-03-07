@@ -1,27 +1,15 @@
 import { IStorage } from "./IStorage";
 import { IStorageEntity } from "./IStorageEntity";
-import { IStorageAsync } from "./IStorageAsync";
 import { getKey, extractEntity, packEntity } from "./Utils";
 
-export class WxLocalStorage implements IStorage, IStorageAsync {
+export class WxLocalStorage implements IStorage {
     private readonly prefix: string = "$local:";
 
     public static get Default(): WxLocalStorage {
         return new WxLocalStorage();
     }
 
-    public set(key: string, value: any, expiresAt?: Date) {
-        if (value === undefined) {
-            throw new Error("invalid value, must not be undefined");
-        }
-
-        const sKey = getKey(key, this.prefix);
-        const entity: IStorageEntity = packEntity(value, expiresAt);
-
-        wx.setStorageSync(sKey, entity);
-    }
-
-    public async setAsync(
+    public async set(
         key: string,
         value: any,
         expiresAt?: Date
@@ -47,17 +35,7 @@ export class WxLocalStorage implements IStorage, IStorageAsync {
         });
     }
 
-    public get(key: any, removeAfter?: boolean): any {
-        const sKey = getKey(key, this.prefix);
-        const entity: IStorageEntity = wx.getStorageSync(sKey);
-        const result = extractEntity(entity);
-        if (removeAfter === true) {
-            wx.removeStorageSync(sKey);
-        }
-        return result;
-    }
-
-    public async getAsync(key: string, removeAfter?: boolean): Promise<any> {
+    public async get(key: string, removeAfter?: boolean): Promise<any> {
         const sKey = getKey(key, this.prefix);
         return new Promise<any>((resolve, reject) => {
             wx.getStorage({
@@ -77,12 +55,7 @@ export class WxLocalStorage implements IStorage, IStorageAsync {
         });
     }
 
-    public remove(key: string): void {
-        const sKey = getKey(key, this.prefix);
-        wx.removeStorageSync(sKey);
-    }
-
-    public removeAsync(key: string): Promise<void> {
+    public remove(key: string): Promise<void> {
         const sKey = getKey(key, this.prefix);
         return new Promise<void>((resolve, reject) => {
             wx.removeStorage({

@@ -11,7 +11,7 @@ export class MemoryStorage implements IStorage
         return new MemoryStorage();
     }
     
-    set(key: string, value: any, expiresAt?: Date): void
+    public async set(key: string, value: any, expiresAt?: Date): Promise<void>
     {
         if(!key)
         {
@@ -21,7 +21,7 @@ export class MemoryStorage implements IStorage
         this.mem[key] = entity;
     }
 
-    get(key: string, removeAfter?: boolean)
+    public async get(key: string, removeAfter?: boolean): Promise<any>
     {
         if(!key)
         {
@@ -35,7 +35,7 @@ export class MemoryStorage implements IStorage
         return extractEntity(entity);
     }
 
-    remove(key: string): void
+    public async remove(key: string): Promise<void>
     {
         if(!key)
         {
