@@ -2,13 +2,13 @@ import { ICache } from "./ICache";
 import { ICacheEntity } from "./ICacheEntity";
 import { extractEntity, packEntity } from "./Utils";
 
-export class MemoryStorage implements ICache
+export class MemoryCache implements ICache
 {
     private readonly mem: object = {};
 
-    public static get Default(): MemoryStorage
+    public static get Default(): MemoryCache
     {
-        return new MemoryStorage();
+        return new MemoryCache();
     }
     
     public async set(key: string, value: any, expiresAt?: Date): Promise<void>
