@@ -1,8 +1,8 @@
-import { IStorage } from "./IStorage";
-import { IStorageEntity } from "./IStorageEntity";
+import { ICache } from "./ICache";
+import { ICacheEntity } from "./ICacheEntity";
 import { getKey, extractEntity, packEntity } from "./Utils";
 
-export class WxLocalStorage implements IStorage {
+export class WxLocalStorage implements ICache {
     private readonly prefix: string = "$local:";
 
     public static get Default(): WxLocalStorage {
@@ -19,7 +19,7 @@ export class WxLocalStorage implements IStorage {
         }
 
         const sKey = getKey(key, this.prefix);
-        const entity: IStorageEntity = packEntity(value, expiresAt);
+        const entity: ICacheEntity = packEntity(value, expiresAt);
 
         return new Promise<void>((resolve, reject) => {
             wx.setStorage({
@@ -41,7 +41,7 @@ export class WxLocalStorage implements IStorage {
             wx.getStorage({
                 key: sKey,
                 success: (data: any) => {
-                    const result = extractEntity(data as IStorageEntity);
+                    const result = extractEntity(data as ICacheEntity);
                     /// only remove when success.
                     if (removeAfter === true) {
                         wx.removeStorageSync(sKey);

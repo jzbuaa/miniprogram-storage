@@ -1,8 +1,8 @@
-import { IStorage } from "./IStorage";
-import { IStorageEntity } from "./IStorageEntity";
+import { ICache } from "./ICache";
+import { ICacheEntity } from "./ICacheEntity";
 import { extractEntity, packEntity } from "./Utils";
 
-export class MemoryStorage implements IStorage
+export class MemoryStorage implements ICache
 {
     private readonly mem: object = {};
 
@@ -17,7 +17,7 @@ export class MemoryStorage implements IStorage
         {
             throw new Error("invalid key");
         }
-        const entity: IStorageEntity = packEntity(value, expiresAt);
+        const entity: ICacheEntity = packEntity(value, expiresAt);
         this.mem[key] = entity;
     }
 
@@ -27,7 +27,7 @@ export class MemoryStorage implements IStorage
         {
             throw new Error("invalid key");
         }
-        const entity: IStorageEntity = this.mem[key];
+        const entity: ICacheEntity = this.mem[key];
         if(removeAfter)
         {
             this.mem[key] = undefined;

@@ -1,6 +1,6 @@
-import { IStorageEntity } from "./IStorageEntity";
+import { ICacheEntity } from "./ICacheEntity";
 
-export function extractEntity(entity: IStorageEntity): any {
+export function extractEntity(entity: ICacheEntity): any {
     if (!entity) {
         return undefined;
     }
@@ -15,8 +15,8 @@ export function extractEntity(entity: IStorageEntity): any {
     }
 }
 
-export function packEntity(value: any, expiresAt: Date): IStorageEntity {
-    const entity: IStorageEntity = {
+export function packEntity(value: any, expiresAt: Date): ICacheEntity {
+    const entity: ICacheEntity = {
         value: value,
         expiresAt: expiresAt ? expiresAt.getTime() : -1
     };

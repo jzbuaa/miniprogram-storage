@@ -1,5 +1,5 @@
 {
-  "name": "miniprogram-storage",
+  "name": "miniprogram-cache",
   "version": "0.0.1",
   "description": "a simple interface defination for storage and default implementation for wx-miniprogram environment",
   "main": "index.js",
