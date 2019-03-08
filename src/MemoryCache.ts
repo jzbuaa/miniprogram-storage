@@ -2,9 +2,13 @@ import { ICache } from "./ICache";
 import { ICacheEntity } from "./ICacheEntity";
 import { extractEntity, packEntity } from "./Utils";
 
+interface Map{
+    [index: string]: any;
+}
+
 export class MemoryCache implements ICache
 {
-    private readonly mem: object = {};
+    private readonly mem: Map = {};
 
     public static get Default(): MemoryCache
     {

@@ -15,7 +15,7 @@ export function extractEntity(entity: ICacheEntity): any {
     }
 }
 
-export function packEntity(value: any, expiresAt: Date): ICacheEntity {
+export function packEntity(value: any, expiresAt?: Date): ICacheEntity {
     const entity: ICacheEntity = {
         value: value,
         expiresAt: expiresAt ? expiresAt.getTime() : -1
