@@ -1,8 +1,13 @@
 {
   "name": "miniprogram-cache",
-  "version": "0.0.5",
+  "version": "0.0.10",
   "description": "a simple interface defination for storage and default implementation for wx-miniprogram environment",
-  "main": "./dist/index.js",
+  "main": "dist/index.js",
+  "files": [
+    "dist/",
+    "es/",
+    "src/"
+  ],
   "scripts": {
     "start": "npm run build",
     "build": "npm run build:es5 && npm run build:es6",

@@ -5,8 +5,9 @@ import { getKey, extractEntity, packEntity } from "./Utils";
 export class WxLocalStorage implements ICache {
     private readonly prefix: string = "$local:";
 
+    private static _default: WxLocalStorage = new WxLocalStorage();
     public static get Default(): WxLocalStorage {
-        return new WxLocalStorage();
+        return this._default;
     }
 
     public async set(
@@ -41,7 +42,7 @@ export class WxLocalStorage implements ICache {
             wx.getStorage({
                 key: sKey,
                 success: (data: any) => {
-                    const result = extractEntity(data as ICacheEntity);
+                    const result = extractEntity(data.data as ICacheEntity);
                     /// only remove when success.
                     if (removeAfter === true) {
                         wx.removeStorageSync(sKey);
@@ -49,6 +50,9 @@ export class WxLocalStorage implements ICache {
                     return resolve(result);
                 },
                 fail: err => {
+                    if(err.errMsg == "getStorage:fail data not found"){
+                        return resolve(undefined);
+                    }
                     return reject(err);
                 }
             });

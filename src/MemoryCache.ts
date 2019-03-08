@@ -10,9 +10,10 @@ export class MemoryCache implements ICache
 {
     private readonly mem: Map = {};
 
+    private static _default: MemoryCache = new MemoryCache();
     public static get Default(): MemoryCache
     {
-        return new MemoryCache();
+        return this._default;
     }
     
     public async set(key: string, value: any, expiresAt?: Date): Promise<void>
