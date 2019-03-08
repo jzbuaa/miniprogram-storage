@@ -1,5 +1,5 @@
 import { ICache } from "./src/ICache";
-import { MemoryStorage } from "./src/MemoryCache";
+import { MemoryCache } from "./src/MemoryCache";
 import { WxLocalStorage } from "./src/WxLocalStorage";
 
-export { ICache, MemoryStorage, WxLocalStorage };
+export { ICache, MemoryCache, WxLocalStorage };

@@ -32,5 +32,5 @@ export function getKey(key: string, prefix: string): string {
         throw new Error("invalid key");
     }
 
-    return this.prefix + key;
+    return prefix + key;
 }
